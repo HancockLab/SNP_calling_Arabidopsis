@@ -53,7 +53,7 @@ We used BWA for aligning the reads. Check pros and cons for different aligner on
 
 ```
 # Index fasta file of the reference genome (here <reference.fa> should 
-# be the TAIR10.fa file generated above
+# be the TAIR10.fa file generated above)
 bwa index -a bwtsw <reference.fa>
 ``` 
 
@@ -68,10 +68,11 @@ For single-end read data:
 bwa aln -n 0.1 -o 1 <reference.fa>  <fastq_file.fastq> -f <fastq_file.fastq.sai>
 
 # Repetitive hits will be randomly chosen
-bwa samse -r "@RG\tID:$SAMPLE_NAME\tSM:$SAMPLE_NAME" <TAIR10.fa> \
+bwa samse -r "@RG\tID:$SAMPLE_NAME\tSM:$SAMPLE_NAME" <reference.fa> \
 	<fastq_file.sai> <fastq_file.fastq.sai> > <alignment.sam>  
 
 ```
+TO ANDREA: Do we to specify the read group with the -r flag?
 
 
 For paired-end read data:
