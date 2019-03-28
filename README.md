@@ -159,8 +159,7 @@ bgzip quality_reference.vcf
 vcf-concat quality_variant.vcf.gz quality_reference.vcf.gz | bgzip -c > <sample_name.vcf.gz>
 
 # Index file using tabix (generates a file with a .tbi extension) 
-tabix final.vcf.gz
-
+tabix <sample_name.vcf.gz>
 ```
 
 Note: Index VCF files with tabix allows to retrieve quickly a part of the file. For instance: `tabix -h <file.vcf.gz> Chr1:100-2000`
