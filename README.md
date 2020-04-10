@@ -1,6 +1,6 @@
 # SNP_calling_Arabidopsis
-Pipeline for SNP calling using sequencing data from Arabidopsis thaliana
 
+Pipeline for SNP calling using sequencing data from *Arabidopsis thaliana*
 
 - [SHORE pipeline](#shore-pipeline)
   * [Required softwares](#required-softwares)
@@ -59,10 +59,9 @@ bwa index -a bwtsw <reference.fa>
 
 ### Perform the alignment
 
-We used the ALN algorithm but the MEM algorithm can be used as well and seems to be better than ALN (check this [paper](https://arxiv.org/pdf/1303.3997.pdf) from one of BWA creator Heng Li). You need as input the fastq files of the accession of interest.
-
 
 For single-end read data:
+
 ```
 # Align reads
 bwa aln -n 0.1 -o 1 <reference.fa>  <fastq_file.fastq> -f <fastq_file.fastq.sai>
@@ -72,10 +71,9 @@ bwa samse -r "@RG\tID:$SAMPLE_NAME\tSM:$SAMPLE_NAME" <reference.fa> \
 	<fastq_file.sai> <fastq_file.fastq.sai> > <alignment.sam>  
 
 ```
-TO ANDREA: Do we to specify the read group with the -r flag?
-
 
 For paired-end read data:
+
 ```
 # Align the first read of the pairs
 bwa aln -n 0.1 -o 1 <reference.fa>  <fastq_file_read_1.fastq> -f <fastq_file_read_1.fastq.sai> 
@@ -87,14 +85,11 @@ bwa aln -n 0.1 -o 1 <reference.fa>  <fastq_file_read_2.fastq> -f <fastq_file_rea
 bwa sampe -a 500 -r "@RG\tID:$SAMPLE_NAME\tSM:$SAMPLE_NAME" <TAIR10.fa> \
 	<fastq_file_read_1.fastq.sai> <fastq_file_read_2.fastq.sai> \
 	 <fastq_file_read_1.fastq>  <fastq_file_read_2.fastq> > <alignment.sam>  
-
-
 ```
 
 ### Convert SAM file to MapList format
 
 SHORE cannot process the SAM file derived from the BWA alignment but uses a MapList file. Check [here](http://shore.sourceforge.net/wiki/index.php/SHORE_File_Formats) for more information on SHORE formats.
-
 
 ```
 # Convert SAM to MapList format 
@@ -102,7 +97,6 @@ shore convert Alignment2Maplist <alignment.sam> --refseq <reference.fa> > <align
 
 # Sort the MapList file
 shore sort --preset maplist --infiles <file.map.list> --inplace
-
 ```
 
 
@@ -134,8 +128,6 @@ shore/./shore consensus \
     -b 0.7 -g 4 -N
 
 ```
-Add details about arguments here.
-
 
 ### Convert SHORE output to VCF
 
@@ -176,9 +168,11 @@ vcf-merge *.vcf.gz | bgzip -c > merged.vcf.gz
 ```
 
 
+## Authors
 
+* **Johan Zicola** - [johanzi](https://github.com/johanzi)
+* **Andrea Fulgione**
 
+## License
 
-
-
-
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
