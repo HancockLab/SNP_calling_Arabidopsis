@@ -1,4 +1,4 @@
-# SNP_calling_Arabidopsis
+# SNP_calling_in_Arabidopsis_with_SHORE
 
 Pipeline for SNP calling using sequencing data from *Arabidopsis thaliana*
 
